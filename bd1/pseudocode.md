@@ -6,6 +6,7 @@ Declare coldestDay as Integer
 Declare day as Integer
 Declare valid as Boolean
 Declare fahrenheit as Real
+Declare dayName as String
 
 FOR day = 0 TO 6
 
@@ -15,7 +16,7 @@ FOR day = 0 TO 6
 
         valid = (celsius[day] >= -60 AND celsius[day] <= 20)
 
-        IF valid = False THEN
+        IF celsius[day] < -60 OR celsius[day] > 20 THEN
             OUTPUT "Invalid temperature. Enter -60 to 20."
         END IF
 
@@ -37,11 +38,34 @@ FOR day = 1 TO 6
 END FOR
 
 
-OUTPUT "Coldest temperature: " + minTemp
-OUTPUT "Coldest day index: " + coldestDay
+OUTPUT "Coldest temperature: " + minTemp rounded to 1 decimal + " C"
+IF coldestDay = 0 THEN
+    dayName = "Monday"
+
+ELSE IF coldestDay = 1 THEN
+    dayName = "Tuesday"
+
+ELSE IF coldestDay = 2 THEN
+    dayName = "Wednesday"
+
+ELSE IF coldestDay = 3 THEN
+    dayName = "Thursday"
+
+ELSE IF coldestDay = 4 THEN
+    dayName = "Friday"
+
+ELSE IF coldestDay = 5 THEN
+    dayName = "Saturday"
+
+ELSE
+    dayName = "Sunday"
+
+END IF
+
+OUTPUT "Coldest day: " + dayName
 
 fahrenheit = minTemp * 9 / 5 + 32
-OUTPUT "Coldest temperature in F: " + fahrenheit
+OUTPUT "Coldest temperature in F: " + fahrenheit rounded to 1 decimal + " F"
 
 
 IF minTemp >= 0 THEN
@@ -100,8 +124,7 @@ FUNCTION PrintDayResult(temp, dayIndex)
 
     fahrenheit = temp * 9 / 5 + 32
 
-    OUTPUT dayName + ": C = " + temp + ", F = " + fahrenheit rounded to 1 decimal
-
+    OUTPUT dayName + ": C = " + temp rounded to 1 decimal + ", F = " + fahrenheit rounded to 1 decimal
 
     IF temp >= 0 THEN
         OUTPUT "Warm - Light jacket"

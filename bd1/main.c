@@ -34,7 +34,7 @@ int main(void)
             valid = (celsius[day] >= -60 &&
                      celsius[day] <= 20);
 
-            if (!valid)
+            if (celsius[day] < -60 || celsius[day] > 20)
             {
                 printf("Invalid temperature. Enter -60 to 20.\n");
             }
@@ -131,13 +131,13 @@ int main(void)
         {
             printf("%-15s %-30s\n",
                    "Very cold",
-                   "Layer clothes and warm boots");
+                   "Layer clothes and wear warm boots");
         }
         else
         {
             printf("%-15s %-30s\n",
                    "Extreme cold",
-                   "Very warm clothes, limit outside time");
+                   "Wear very warm clothes and limit time outside");
         }
     }
 

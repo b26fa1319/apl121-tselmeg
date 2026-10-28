@@ -1,95 +1,82 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<flowgorithm fileversion="2.11">
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
     <attributes>
-        <attribute name="name" value="Topic 13 - Winter Cold" />
-        <attribute name="authors" value="AI-assisted learning example" />
-        <attribute name="about" value="APL121 Code Quest topic 13. Seven temperatures, Fahrenheit conversion, classification, clothing advice, and minimum search. Native Flowgorithm testing is required before submission." />
+        <attribute name="name" value="quest"/>
+        <attribute name="authors" value="tslmgalmighty"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-28 08:23:58 PM"/>
+        <attribute name="created" value="dHNsbWdhbG1pZ2h0eTtUU0VMTUVHUy1NQUNCT087MjAyNi0xMC0yNzsxMDozMDoxOCBQTTszNzgx"/>
+        <attribute name="edited" value="dHNsbWdhbG1pZ2h0eTtUU0VMTUVHUy1NQUNCT087MjAyNi0xMC0yODswODoyMzo1OCBQTTsyNjszOTU4"/>
     </attributes>
     <function name="Main" type="None" variable="">
-        <parameters />
+        <parameters/>
         <body>
-            <declare name="celsius" type="Real" array="True" size="7" />
-            <declare name="minTemp" type="Real" array="False" size="" />
-            <declare name="coldestDay" type="Integer" array="False" size="" />
-            <declare name="day" type="Integer" array="False" size="" />
-            <declare name="valid" type="Boolean" array="False" size="" />
-            <output expression="&quot;TOPIC 13: UVLIIN HUITEN&quot;" newline="True" />
-            <output expression="&quot;Enter 7 temperatures, one number per line.&quot;" newline="True" />
-            <output expression="&quot;Allowed range: -60 to 20 Celsius, inclusive.&quot;" newline="True" />
-            <comment text="1. Өдөр бүрийн хэмийг авна. Зөв хүрээний тоо ортол Do давталт үргэлжилнэ." />
+            <declare name="dayName" type="String" array="False" size=""/>
+            <declare name="celsius" type="Real" array="True" size="7"/>
+            <declare name="minTemp" type="Real" array="False" size=""/>
+            <declare name="fahrenheit" type="Real" array="False" size=""/>
+            <declare name="coldestDay" type="Integer" array="False" size=""/>
+            <declare name="day" type="Integer" array="False" size=""/>
+            <declare name="valid" type="Boolean" array="False" size=""/>
             <for variable="day" start="0" end="6" direction="inc" step="1">
                 <do expression="!valid">
-                    <output expression="DayName(day) &amp; &quot; Celsius [-60,20]: &quot;" newline="True" />
-                    <input variable="celsius[day]" />
-                    <assign variable="valid" expression="celsius[day] &gt;= -60 &amp;&amp; celsius[day] &lt;= 20" />
+                    <output expression="&quot;Celsius [-60, 20]:&quot;" newline="True"/>
+                    <input variable="celsius[day]"/>
+                    <assign variable="valid" expression="celsius[day] &gt;= -60 &amp;&amp; celsius[day] &lt;= 20"/>
                     <if expression="celsius[day] &lt; -60 || celsius[day] &gt; 20">
                         <then>
-                            <output expression="&quot;Invalid range. Enter -60 to 20 Celsius.&quot;" newline="True" />
+                            <output expression="&quot;Invalid temperature. Enter -60 to 20.&quot;" newline="True"/>
                         </then>
-                        <else />
+                        <else/>
                     </if>
                 </do>
             </for>
-            <comment text="2. Хамгийн бага хэмийг хайна. Тэнцүү үед эхний өдрийг хадгална." />
-            <assign variable="minTemp" expression="celsius[0]" />
-            <assign variable="coldestDay" expression="0" />
+            <assign variable="minTemp" expression="celsius[0]"/>
+            <assign variable="coldestDay" expression="0"/>
             <for variable="day" start="1" end="6" direction="inc" step="1">
                 <if expression="celsius[day] &lt; minTemp">
                     <then>
-                        <assign variable="minTemp" expression="celsius[day]" />
-                        <assign variable="coldestDay" expression="day" />
+                        <assign variable="minTemp" expression="celsius[day]"/>
+                        <assign variable="coldestDay" expression="day"/>
                     </then>
-                    <else />
+                    <else/>
                 </if>
             </for>
-            <comment text="3. PrintDayResult дэд алгоритмыг Call блокоор өдөр бүр дуудна." />
-            <output expression="&quot;Day | Celsius | Fahrenheit | Category | Clothing advice&quot;" newline="True" />
-            <for variable="day" start="0" end="6" direction="inc" step="1">
-                <call expression="PrintDayResult(day, celsius[day])" />
-            </for>
-            <comment text="4. Хамгийн хүйтэн өдөр болон хэмийг хоёр нэгжээр хэвлэнэ." />
-            <output expression="&quot;Coldest day: &quot; &amp; DayName(coldestDay)" newline="True" />
-            <output expression="&quot;Celsius: &quot; &amp; ToFixed(minTemp, 2)" newline="True" />
-            <output expression="&quot;Fahrenheit: &quot; &amp; ToFixed(minTemp * 9.0 / 5.0 + 32.0, 2)" newline="True" />
-        </body>
-    </function>
-    <function name="PrintDayResult" type="None" variable="">
-        <parameters>
-            <parameter name="day" type="Integer" array="False" />
-            <parameter name="celsius" type="Real" array="False" />
-        </parameters>
-        <body>
-            <declare name="fahrenheit" type="Real" array="False" size="" />
-            <declare name="category" type="String" array="False" size="" />
-            <declare name="advice" type="String" array="False" size="" />
-            <comment text="Өдрийн дугаар болон хэмийг параметрээр авч, хүснэгтийн нэг мөрийг хэвлэнэ." />
-            <assign variable="fahrenheit" expression="celsius * 9.0 / 5.0 + 32.0" />
-            <if expression="celsius &gt;= 0">
+            <if expression="coldestDay = 0">
                 <then>
-                    <assign variable="category" expression="&quot;Dulaahan&quot;" />
-                    <assign variable="advice" expression="&quot;Hungun kurtka&quot;" />
+                    <assign variable="dayName" expression="&quot;Monday&quot;"/>
                 </then>
                 <else>
-                    <if expression="celsius &gt;= -10">
+                    <if expression="coldestDay = 1">
                         <then>
-                            <assign variable="category" expression="&quot;Seruuhen&quot;" />
-                            <assign variable="advice" expression="&quot;Dulaan kurtka, malgai&quot;" />
+                            <assign variable="dayName" expression="&quot;Tuesday&quot;"/>
                         </then>
                         <else>
-                            <if expression="celsius &gt;= -20">
+                            <if expression="coldestDay = 2">
                                 <then>
-                                    <assign variable="category" expression="&quot;Huiten&quot;" />
-                                    <assign variable="advice" expression="&quot;Uvliin kurtka, beelii&quot;" />
+                                    <assign variable="dayName" expression="&quot;Wednesday&quot;"/>
                                 </then>
                                 <else>
-                                    <if expression="celsius &gt;= -30">
+                                    <if expression="coldestDay = 3">
                                         <then>
-                                            <assign variable="category" expression="&quot;Mash huiten&quot;" />
-                                            <assign variable="advice" expression="&quot;Davharlaj ums, dulaan gutal&quot;" />
+                                            <assign variable="dayName" expression="&quot;Thursday&quot;"/>
                                         </then>
                                         <else>
-                                            <assign variable="category" expression="&quot;Tas huiten&quot;" />
-                                            <assign variable="advice" expression="&quot;Mash dulaan huvtsas, gadaa bagasga&quot;" />
+                                            <if expression="coldestDay = 4">
+                                                <then>
+                                                    <assign variable="dayName" expression="&quot;Friday&quot;"/>
+                                                </then>
+                                                <else>
+                                                    <if expression="coldestDay = 5">
+                                                        <then>
+                                                            <assign variable="dayName" expression="&quot;Saturday&quot;"/>
+                                                        </then>
+                                                        <else>
+                                                            <assign variable="dayName" expression="&quot;Sunday&quot;"/>
+                                                        </else>
+                                                    </if>
+                                                </else>
+                                            </if>
                                         </else>
                                     </if>
                                 </else>
@@ -98,51 +85,118 @@
                     </if>
                 </else>
             </if>
-            <output expression="DayName(day) &amp; &quot; | &quot; &amp; ToFixed(celsius, 2) &amp; &quot; | &quot; &amp; ToFixed(fahrenheit, 2) &amp; &quot; | &quot; &amp; category &amp; &quot; | &quot; &amp; advice" newline="True" />
-        </body>
-    </function>
-    <function name="DayName" type="String" variable="dayText">
-        <parameters>
-            <parameter name="day" type="Integer" array="False" />
-        </parameters>
-        <body>
-            <declare name="dayText" type="String" array="False" size="" />
-            <comment text="0-6 индексийг Даваа-Ням гарагийн нэр болгох туслах функц." />
-            <if expression="day == 0">
+            <output expression="&quot;Coldest temperature: &quot; &amp; ToFixed(minTemp, 1) &amp; &quot; C&quot;" newline="True"/>
+            <output expression="&quot;Coldest day: &quot; &amp; dayName" newline="True"/>
+            <assign variable="fahrenheit" expression="minTemp * 9 / 5 + 32"/>
+            <output expression="&quot;Coldest temperature in F: &quot; &amp; ToFixed(fahrenheit, 1) &amp; &quot; F&quot;" newline="True"/>
+            <if expression="minTemp &gt;= 0">
                 <then>
-                    <assign variable="dayText" expression="&quot;Davaa&quot;" />
+                    <output expression="&quot;Warm - Light jacket&quot;" newline="True"/>
                 </then>
                 <else>
-                    <if expression="day == 1">
+                    <if expression="minTemp &gt;= -10">
                         <then>
-                            <assign variable="dayText" expression="&quot;Myagmar&quot;" />
+                            <output expression="&quot;Cool - Warm jacket and hat&quot;" newline="True"/>
                         </then>
                         <else>
-                            <if expression="day == 2">
+                            <if expression="minTemp &gt;= -20">
                                 <then>
-                                    <assign variable="dayText" expression="&quot;Lkhagva&quot;" />
+                                    <output expression="&quot;Cold - Winter jacket and gloves&quot;" newline="True"/>
                                 </then>
                                 <else>
-                                    <if expression="day == 3">
+                                    <if expression="minTemp &gt;= -30">
                                         <then>
-                                            <assign variable="dayText" expression="&quot;Purev&quot;" />
+                                            <output expression="&quot;Very cold - Layer clothes and wear warm boots&quot;" newline="True"/>
                                         </then>
                                         <else>
-                                            <if expression="day == 4">
+                                            <output expression="&quot;Extreme cold - Wear very warm clothes and limit time outside&quot;" newline="True"/>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <for variable="day" start="0" end="6" direction="inc" step="1">
+                <call expression="PrintDayResult(celsius[day], day)"/>
+            </for>
+        </body>
+    </function>
+    <function name="PrintDayResult" type="None" variable="">
+        <parameters>
+            <parameter name="temp" type="Real" array="False"/>
+            <parameter name="dayIndex" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="fahrenheit" type="Real" array="False" size=""/>
+            <declare name="dayName" type="String" array="False" size=""/>
+            <if expression="dayIndex = 0">
+                <then>
+                    <assign variable="dayName" expression="&quot;Monday&quot;"/>
+                </then>
+                <else>
+                    <if expression="dayIndex = 1">
+                        <then>
+                            <assign variable="dayName" expression="&quot;Tuesday&quot;"/>
+                        </then>
+                        <else>
+                            <if expression="dayIndex = 2">
+                                <then>
+                                    <assign variable="dayName" expression="&quot;Wednesday&quot;"/>
+                                </then>
+                                <else>
+                                    <if expression="dayIndex = 3">
+                                        <then>
+                                            <assign variable="dayName" expression="&quot;Thursday&quot;"/>
+                                        </then>
+                                        <else>
+                                            <if expression="dayIndex = 4">
                                                 <then>
-                                                    <assign variable="dayText" expression="&quot;Baasan&quot;" />
+                                                    <assign variable="dayName" expression="&quot;Friday&quot;"/>
                                                 </then>
                                                 <else>
-                                                    <if expression="day == 5">
+                                                    <if expression="dayIndex = 5">
                                                         <then>
-                                                            <assign variable="dayText" expression="&quot;Byamba&quot;" />
+                                                            <assign variable="dayName" expression="&quot;Saturday&quot;"/>
                                                         </then>
                                                         <else>
-                                                            <assign variable="dayText" expression="&quot;Nyam&quot;" />
+                                                            <assign variable="dayName" expression="&quot;Sunday&quot;"/>
                                                         </else>
                                                     </if>
                                                 </else>
                                             </if>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+            <assign variable="fahrenheit" expression="temp * 9 / 5 + 32"/>
+            <output expression="dayName &amp; &quot;: C = &quot; &amp; ToFixed(temp, 1) &amp; &quot;, F = &quot; &amp; ToFixed(fahrenheit, 1)" newline="True"/>
+            <if expression="temp &gt;= 0">
+                <then>
+                    <output expression="&quot;Warm - Light jacket&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="temp &gt;= -10">
+                        <then>
+                            <output expression="&quot;Cool - Warm jacket and hat&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <if expression="temp &gt;= -20">
+                                <then>
+                                    <output expression="&quot;Cold - Winter jacket and gloves&quot;" newline="True"/>
+                                </then>
+                                <else>
+                                    <if expression="temp &gt;= -30">
+                                        <then>
+                                            <output expression="&quot;Very cold - Layer clothes and wear warm boots&quot;" newline="True"/>
+                                        </then>
+                                        <else>
+                                            <output expression="&quot;Extreme cold - Wear very warm clothes and limit time outside&quot;" newline="True"/>
                                         </else>
                                     </if>
                                 </else>
